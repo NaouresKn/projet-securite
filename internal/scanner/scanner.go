@@ -1,4 +1,4 @@
-//Module pour scanner les fichiers .bat
+// Module pour scanner les fichiers .bat
 package scanner
 
 import (
@@ -29,6 +29,8 @@ func ScanBatchFiles(dir string) []string {
 
 // ReadBatchFile lit le contenu d'un fichier .bat
 func ReadBatchFile(path string) string {
+
+	//this is deprecated !!!!
 	content, err := ioutil.ReadFile(path)
 	if err != nil {
 		fmt.Println("Erreur de lecture :", err)

@@ -15,7 +15,7 @@ func main() {
 	fmt.Println("Démarrage du système de sécurité...")
 
 	// Répertoire à scanner
-	dir := "./"
+	dir := "./damn.bat"
 	files := scanner.ScanBatchFiles(dir)
 
 	// Analyse de chaque fichier trouvé
@@ -32,5 +32,7 @@ func main() {
 		thread := analyzer.AnalyzeWithAI(content)
 		// Gestion des résultats
 		executor.HandleFile(file, thread)
+
+		break
 	}
 }
