@@ -1,4 +1,4 @@
-//Gestion des configurations (par ex., URL API)
+// Gestion des configurations (par ex., URL API)
 package config
 
 // Config structure les configurations nécessaires
@@ -8,7 +8,8 @@ type Config struct {
 
 // LoadConfig retourne les configurations
 func LoadConfig() Config {
+
 	return Config{
-		APIURL: "https://your-llama-or-gemini-api-url.com/analyze",
+		APIURL: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=",
 	}
 }

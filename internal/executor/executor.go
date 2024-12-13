@@ -10,6 +10,7 @@ import (
 
 // HandleFile exécute ou met en quarantaine un fichier selon son statut
 func HandleFile(path string, thread int) { // path est le chemin a traiter
+
 	if thread == 0 {
 		fmt.Println("Fichier sûr détecté. Exécution :", path)
 		err := executeBatchFile(path)

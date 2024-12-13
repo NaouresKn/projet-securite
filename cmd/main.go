@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"projetSecurite/internal/analyzer"
-	"projetSecurite/internal/executor"
 	"projetSecurite/internal/scanner"
 )
 
@@ -18,10 +17,16 @@ func main() {
 	dir := "./damn.bat"
 	files := scanner.ScanBatchFiles(dir)
 
+	fmt.Println("Scanning the file") 
+
+	fmt.Println(files[0])
+
 	// Analyse de chaque fichier trouvé
 	for _, file := range files {
 		fmt.Println("Analyse du fichier :", file)
 		content := scanner.ReadBatchFile(file)
+
+		fmt.Println(content)
 
 		if content == "" {
 			log.Println("Impossible de lire le fichier :", file)
@@ -29,9 +34,17 @@ func main() {
 		}
 
 		// Analyse IA
-		thread := analyzer.AnalyzeWithAI(content)
-		// Gestion des résultats
-		executor.HandleFile(file, thread)
+		threatString, threatStatus := analyzer.AnalyzeWithAI(content)
+
+
+		fmt.Printf("crossed !")
+
+
+
+		fmt.Println(threatStatus , threatString)
+
+		// Collecting the malware file
+		// executor.HandleFile(file, 0)
 
 		break
 	}
