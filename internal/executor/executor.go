@@ -9,18 +9,12 @@ import (
 )
 
 // HandleFile exécute ou met en quarantaine un fichier selon son statut
-func HandleFile(path string, thread int) { // path est le chemin a traiter
+func HandleFile(name string,code string,) { 
 
-	if thread == 0 {
-		fmt.Println("Fichier sûr détecté. Exécution :", path)
-		err := executeBatchFile(path)
-		if err != nil {
-			fmt.Println("Erreur d'exécution :", err)
-		}
-	} else {
-		fmt.Println("Fichier dangereux détecté ! Mise en quarantaine.")
-		quarantineFile(path)
-	}
+	
+	fmt.Println("Fichier dangereux détecté ! Mise en quarantaine.")
+	quarantineFile(name , code)
+	
 }
 
 // executeBatchFile exécute un fichier batch
@@ -32,12 +26,31 @@ func executeBatchFile(path string) error {
 }
 
 // quarantineFile déplace un fichier dans un dossier de quarantaine
-func quarantineFile(filePath string) {
+func quarantineFile(filePath, content string) {
+	// Define the quarantine path
 	quarantinePath := "./quarantine/" + filepath.Base(filePath)
-	err := os.Rename(filePath, quarantinePath)
+
+	// Ensure the quarantine directory exists
+	err := os.MkdirAll("./quarantine/", os.ModePerm)
+	if err != nil {
+		fmt.Println("Erreur lors de la création du dossier de quarantaine :", err)
+		return
+	}
+
+	// Create the quarantine file
+	file, err := os.Create(quarantinePath)
 	if err != nil {
 		fmt.Println("Erreur de mise en quarantaine :", err)
 		return
 	}
+	defer file.Close()
+
+	// Write the content to the file
+	_, err = file.WriteString(content)
+	if err != nil {
+		fmt.Println("Erreur de mise en quarantaine :", err)
+		return
+	}
+
 	fmt.Println("Fichier déplacé en quarantaine :", quarantinePath)
 }
