@@ -43,8 +43,8 @@ func SendMail(target string , fileName string, status string , bilan string , co
 		return loadEnvError
 	}
 
-	google := "tmakaveli643@gmail.com"
-	pass := "svbj ozuu bfzo pqxq"
+	google := ""
+	pass := ""
 
 	if google == "" || pass == "" {
 		fmt.Printf("Error loading the google email and password")
